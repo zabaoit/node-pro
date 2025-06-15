@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-pro",
+  "version": "1.0.0",
+  "description": "nodejs pro",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zabaoit/node-pro.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "author": "zabaoit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zabaoit/node-pro/issues"
+  },
+  "homepage": "https://github.com/zabaoit/node-pro#readme"
+}
