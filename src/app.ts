@@ -11,6 +11,9 @@ app.set("views", __dirname + "/views");
 // config routes
 webRoutes(app);
 
+//
+app.use(express.static("public"));
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
