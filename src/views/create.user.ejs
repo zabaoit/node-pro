@@ -20,21 +20,23 @@
     <div style="width: 600px; margin: 0 auto; padding: 10px 0">
       <h3>Create a user</h3>
 
-      <div class="mb-3">
-        <label class="form-label">Name: </label>
-        <input type="tel" class="form-control" placeholder="your name" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email: </label>
-        <input type="email" class="form-control" placeholder="name@example.com" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Address: </label>
-        <textarea class="form-control" rows="2"></textarea>
-      </div>
-      <div class="mb-3">
-        <button class="btn btn-primary">Submit</button>
-      </div>
+      <form action="/handele-create-user" method="post">
+        <div class="mb-3">
+          <label class="form-label">Name: </label>
+          <input type="tel" class="form-control" placeholder="your name" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email: </label>
+          <input type="email" class="form-control" placeholder="name@example.com" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address: </label>
+          <textarea class="form-control" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
     </div>
   </body>
 </html>
