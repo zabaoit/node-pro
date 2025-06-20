@@ -13,11 +13,11 @@ const getCreateUserPage = (req: Request, res: Response) => {
   return res.render("create.user.ejs");
 };
 
-const postCreateUser = (req: Request, res: Response) => {
+const postCreateUser = async (req: Request, res: Response) => {
   const { fullName, email, addDress } = req.body;
 
   //  handle create uses
-  handleCreateUser(fullName, email, addDress);
+  await handleCreateUser(fullName, email, addDress);
   return res.redirect("/");
 };
 
