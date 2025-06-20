@@ -22,7 +22,7 @@
   <body>
     <div style="margin: 25px">
       <div style="display: flex; justify-content: space-between; align-items: center">
-        <h1>List Users: <%= name %></h1>
+        <h1>List Users:</h1>
         <div>
           <a href="/create-user" class="btn btn-warning">Create new user</a>
         </div>
@@ -39,15 +39,17 @@
         </thead>
 
         <tbody>
+          <% users.forEach( function (user) { %>
           <tr>
-            <td>Peter</td>
-            <td>Griffin</td>
-            <td>$100</td>
-            <td>$100</td>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.address %></td>
             <td>
               <button class="btn btn-warning">Delete</button>
             </td>
           </tr>
+          <% }) %>
         </tbody>
       </table>
     </div>
