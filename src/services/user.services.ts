@@ -29,4 +29,20 @@ const getAllUsers = async () => {
     return [];
   }
 };
-export { handleCreateUser, getAllUsers };
+
+const handleDeleteUser = async (id: string) => {
+  // insert into database
+  const connection = await getConnection();
+
+  try {
+    const sql = "DELETE FROM `users` WHERE `id` = ? LIMIT 1";
+    const values = [id];
+
+    const [result, fields] = await connection.execute(sql, values);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+export { handleCreateUser, getAllUsers, handleDeleteUser };
