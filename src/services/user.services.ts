@@ -45,7 +45,7 @@ const handleDeleteUser = async (id: string) => {
     return [];
   }
 };
-const handleViewUser = async (id: string) => {
+const getUserById = async (id: string) => {
   const connection = await getConnection();
 
   try {
@@ -60,4 +60,20 @@ const handleViewUser = async (id: string) => {
     return [];
   }
 };
-export { handleCreateUser, getAllUsers, handleDeleteUser, handleViewUser };
+
+const updateUserById = async (id: string, fullName: string, email: string, addDress: string) => {
+  const connection = await getConnection();
+
+  try {
+    const sql = "UPDATE `users` SET `name` = ?, `email` = ?, `address` = ? WHERE `id` = ? LIMIT 1";
+    const values = [fullName, email, addDress, id];
+
+    const [result, fields] = await connection.execute(sql, values);
+
+    return result;
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+};
+export { handleCreateUser, getAllUsers, handleDeleteUser, getUserById, updateUserById };
