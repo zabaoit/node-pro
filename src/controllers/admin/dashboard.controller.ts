@@ -1,7 +1,11 @@
 import { Response, Request } from "express";
 
 const getDashBoardPage = async (req: Request, res: Response) => {
-  return res.render("admin/dashboard.ejs");
+  return res.render("admin/dashboard/show.ejs");
 };
 
-export { getDashBoardPage };
+const getAdminUserPage = async (req: Request, res: Response) => {
+  return res.render("admin/user/show.ejs");
+};
+
+export { getDashBoardPage, getAdminUserPage };
