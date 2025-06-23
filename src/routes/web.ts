@@ -7,13 +7,16 @@ import {
   postUpdateUser,
   handleViewUser,
 } from "controllers/user.controller";
-import { getAdminUserPage, getDashBoardPage } from "controllers/admin/dashboard.controller";
+import {
+  getAdminOrderPage,
+  getAdminProductPage,
+  getAdminUserPage,
+  getDashBoardPage,
+} from "controllers/admin/dashboard.controller";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
-
-  router.get("/create-user", getCreateUserPage);
 
   router.post("/handle-create-user", postCreateUser);
 
@@ -25,8 +28,13 @@ const webRoutes = (app: Express) => {
 
   // admin router
   router.get("/admin", getDashBoardPage);
+
   router.get("/admin/user", getAdminUserPage);
 
+  router.get("/admin/create-user", getCreateUserPage);
+
+  router.get("/admin/product", getAdminProductPage);
+  router.get("/admin/order", getAdminOrderPage);
   app.use("/", router);
 };
 
