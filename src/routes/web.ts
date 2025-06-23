@@ -18,8 +18,6 @@ const router = express.Router();
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
 
-  router.post("/handle-create-user", postCreateUser);
-
   router.post("/handle-delete-user/:id", postDeleteUser);
 
   router.get("/handle-view-user/:id", handleViewUser);
@@ -32,6 +30,8 @@ const webRoutes = (app: Express) => {
   router.get("/admin/user", getAdminUserPage);
 
   router.get("/admin/create-user", getCreateUserPage);
+
+  router.post("/admin/handle-create-user", postCreateUser);
 
   router.get("/admin/product", getAdminProductPage);
   router.get("/admin/order", getAdminOrderPage);

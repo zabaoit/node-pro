@@ -18,17 +18,17 @@ const getHomePage = async (req: Request, res: Response) => {
 
 const getCreateUserPage = async (req: Request, res: Response) => {
   const roles = await getAllRoles();
-  console.log(roles);
+
   return res.render("admin/user/create.ejs", {
     roles: roles,
   });
 };
 
 const postCreateUser = async (req: Request, res: Response) => {
-  const { fullName, email, addDress } = req.body;
+  const { fullName, username, phone, role, addDress } = req.body;
 
-  //  handle create uses
-  await handleCreateUser(fullName, email, addDress);
+  // //  handle create uses
+  // await handleCreateUser(fullName, email, addDress);
   return res.redirect("/");
 };
 
