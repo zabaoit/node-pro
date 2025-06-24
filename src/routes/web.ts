@@ -14,6 +14,8 @@ import {
   getDashBoardPage,
 } from "controllers/admin/dashboard.controller";
 const router = express.Router();
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
@@ -31,7 +33,10 @@ const webRoutes = (app: Express) => {
 
   router.get("/admin/create-user", getCreateUserPage);
 
-  router.post("/admin/handle-create-user", postCreateUser);
+  // router.post("/admin/handle-create-user", postCreateUser);
+  router.post("/admin/handle-create-user", upload.single("avatar"), (req, res) => {
+    res.send("ok");
+  });
 
   router.get("/admin/product", getAdminProductPage);
   router.get("/admin/order", getAdminOrderPage);
