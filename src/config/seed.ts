@@ -6,26 +6,7 @@ const initDataBase = async () => {
   const countUser = await prisma.user.count();
   const countRole = await prisma.roles.count();
 
-  const defaultPassWord = await hashPassWord("123456");
-  if (countUser === 0) {
-    await prisma.user.createMany({
-      data: [
-        {
-          fullName: "Nguyen Gia Bao",
-          username: "baobao",
-          password: defaultPassWord,
-          accountType: ACCOUNT_TYPE.SYSTEM,
-        },
-
-        {
-          fullName: "ADMIN",
-          username: "ngb",
-          password: defaultPassWord,
-          accountType: ACCOUNT_TYPE.SYSTEM,
-        },
-      ],
-    });
-  } else if (countRole === 0) {
+  if (countRole === 0) {
     await prisma.roles.createMany({
       data: [
         {
@@ -38,7 +19,35 @@ const initDataBase = async () => {
         },
       ],
     });
-  } else {
+  }
+  if (countUser === 0) {
+    const defaultPassWord = await hashPassWord("123456");
+    const adminRole = prisma.roles.findFirst({
+      where: { name: "ADMIN" },
+    });
+    if (adminRole) {
+      await prisma.user.createMany({
+        data: [
+          {
+            fullName: "Nguyen Gia Bao",
+            username: "baobao",
+            password: defaultPassWord,
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleId: (await adminRole).id,
+          },
+
+          {
+            fullName: "ADMIN",
+            username: "ngb",
+            password: defaultPassWord,
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            roleId: (await adminRole).id,
+          },
+        ],
+      });
+    }
+  }
+  if (countRole !== 0 && countUser !== 0) {
     console.log(">>> ALREADLY INIT USER");
   }
 };

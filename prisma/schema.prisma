@@ -24,6 +24,8 @@ model User {
   accountType	String   @db.VarChar(50)
   avatar		String?   @db.VarChar(255)
 
+  role   Roles @relation(fields: [roleId], references: [id])
+  roleId Int
 }
 
 model Roles {
@@ -31,6 +33,8 @@ model Roles {
   id		Int      @id @default(autoincrement())
   name	String   @db.VarChar(100)
   description	String   @db.VarChar(255)
+
+  users User[]
 }
 
 model Order {
