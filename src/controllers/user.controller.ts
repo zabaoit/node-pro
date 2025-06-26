@@ -11,7 +11,7 @@ const getHomePage = async (req: Request, res: Response) => {
   //  get user
   const users = await getAllUsers();
 
-  return res.render("home.ejs", {
+  return res.render("client/homepage/show.ejs", {
     users: users,
   });
 };
