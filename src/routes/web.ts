@@ -14,10 +14,12 @@ import {
   getDashBoardPage,
 } from "controllers/admin/dashboard.controller";
 import fileUploadMiddleware from "src/middleware/multer";
+import { getProductPage } from "controllers/client/product.controller";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
+  router.get("/product/:id", getProductPage);
 
   // admin router
   router.get("/admin", getDashBoardPage);
