@@ -1,7 +1,6 @@
 import { prisma } from "config/client";
 import { ACCOUNT_TYPE } from "config/constant";
 import bcrypt from "bcrypt";
-import { Tracing } from "trace_events";
 const saltRounds = 10;
 
 const hashPassWord = async (myPlaintextPassword: string) => {
