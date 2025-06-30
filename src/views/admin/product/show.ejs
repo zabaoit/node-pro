@@ -40,6 +40,27 @@
                   <th>Factory</th>
                   <th>Action</th>
                 </thead>
+
+                <tbody>
+                  <% products.forEach( function (product) { %>
+                  <tr>
+                    <td><%= product.id %></td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price %></td>
+                    <td><%= product.factory %></td>
+                    <td>
+                      <div style="display: flex; gap: 15px">
+                        <form action="/admin/view-user/<%= product.id %>" method="get">
+                          <button class="btn btn-secondary">View</button>
+                        </form>
+                        <form action="/admin/delete-user/<%= product.id %>" method="post">
+                          <button class="btn btn-danger">Delete</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
               </table>
             </div>
           </div>
