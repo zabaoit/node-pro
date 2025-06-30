@@ -38,31 +38,34 @@
             <div class="row">
               <div class="col-6 mx-auto">
                 <div style="width: 600px; margin: 0 auto">
+                  <% errors.forEach( function (error) { %>
+                  <div class="alert alert-danger mb-3"><%=error%></div>
+                  <% }) %>
                   <h5>Create a product</h5>
 
                   <form action="/admin/handle-create-product" method="post" enctype="multipart/form-data">
                     <div class="row">
                       <div class="mb-3 col-6">
                         <label class="form-label">Name </label>
-                        <input type="tel" name="name" class="form-control" />
+                        <input type="tel" value="<%= oldData.name %>" name="name" class="form-control" />
                       </div>
                       <div class="mb-3 col-6">
                         <label class="form-label">Price </label>
-                        <input type="number" name="price" class="form-control" />
+                        <input type="number" value="<%= oldData.price %>" name="price" class="form-control" />
                       </div>
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Detail Description </label>
-                      <textarea class="form-control" name="detailDesc" rows="2"></textarea>
+                      <textarea class="form-control" name="detailDesc" rows="2"><%= oldData.detailDesc %></textarea>
                     </div>
                     <div class="row mb-3">
                       <div class="md-3 col-6">
                         <label for="inputCity" class="form-label">Short Description </label>
-                        <input type="text" class="form-control" name="shortDesc" />
+                        <input type="text" value="<%= oldData.shortDesc %>" class="form-control" name="shortDesc" />
                       </div>
                       <div class="md-3 col-6">
-                        <label for="inputState" class="form-label">Quanity</label>
-                        <input type="number" class="form-control" name="quantity" />
+                        <label for="inputState" class="form-label">Quantity</label>
+                        <input type="number" value="<%= oldData.quantity %>" class="form-control" name="quantity" />
                       </div>
                     </div>
                     <div class="row">

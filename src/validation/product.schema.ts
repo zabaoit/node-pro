@@ -2,10 +2,20 @@ import { z } from "zod";
 
 export const ProductSchema = z.object({
   name: z.string().trim().min(1, { message: "Name không được để trống!" }),
-  price: z.number().min(1, { message: "Price tối thiểu là 1!" }),
+  price: z
+    .string()
+    .transform(val => (val === "" ? 0 : Number(val)))
+    .refine(num => num > 0, {
+      message: "Price tối thiểu là 1",
+    }),
   detailDesc: z.string().trim().min(1, { message: "DetailDesc không được để trống!" }),
   shortDesc: z.string().trim().min(1, { message: "ShortDesc không được để trống!" }),
-  quantity: z.number().min(1, { message: "Quantity tối thiểu là 1!" }),
+  quantity: z
+    .string()
+    .transform(val => (val === "" ? 0 : Number(val)))
+    .refine(num => num > 0, {
+      message: "Quantity tối thiểu là 1",
+    }),
   factory: z.string().trim().min(1, { message: "Factory không được để trống!" }),
   target: z.string().trim().min(1, { message: "Target không được để trống!" }),
 });
