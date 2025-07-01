@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import {
   getCreateUserPage,
-  getHomePage,
   postCreateUser,
   postDeleteUser,
   postUpdateUser,
@@ -16,6 +15,7 @@ import {
 import fileUploadMiddleware from "src/middleware/multer";
 import {
   getAdminCreateProductPage,
+  getHomePage,
   getProductPage,
   getViewProduct,
   postAdminCreateProduct,

@@ -1,6 +1,15 @@
 import { Response, Request } from "express";
 import { createProduct, getProductById, handleDeleteProduct, updateProductById } from "services/admin/product.service";
+import { getAllProducts } from "services/client/home.service";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
+
+const getHomePage = async (req: Request, res: Response) => {
+  const products = await getAllProducts();
+
+  return res.render("client/homepage/show.ejs", {
+    products,
+  });
+};
 
 const getProductPage = (req: Request, res: Response) => {
   return res.render("client/product/detail.ejs");
@@ -98,6 +107,7 @@ const postAdminUpdateProduct = async (req: Request, res: Response) => {
   return res.redirect("/admin/product");
 };
 export {
+  getHomePage,
   getProductPage,
   getAdminCreateProductPage,
   postAdminCreateProduct,
