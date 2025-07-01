@@ -5,4 +5,10 @@ const getAllProducts = async () => {
   return products;
 };
 
-export { getAllProducts };
+const getProductById = async (id: number) => {
+  const product = await prisma.product.findUnique({
+    where: { id },
+  });
+  return product;
+};
+export { getAllProducts, getProductById };
