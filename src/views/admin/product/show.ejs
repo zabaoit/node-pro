@@ -50,10 +50,10 @@
                     <td><%= product.factory %></td>
                     <td>
                       <div style="display: flex; gap: 15px">
-                        <form action="/admin/view-user/<%= product.id %>" method="get">
+                        <form action="/admin/view-product/<%= product.id %>" method="get">
                           <button class="btn btn-secondary">View</button>
                         </form>
-                        <form action="/admin/delete-user/<%= product.id %>" method="post">
+                        <form action="/admin/delete-product/<%= product.id %>" method="post">
                           <button class="btn btn-danger">Delete</button>
                         </form>
                       </div>
