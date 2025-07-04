@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // config static files
 app.use(express.static("public"));
 
-// config
+// config session
 app.use(
   session({
     secret: "keyboard cat",
@@ -31,6 +31,7 @@ app.use(
 
 // config passport
 app.use(passport.initialize());
+app.use(passport.authenticate("session"));
 configPassportLocal();
 
 // config routes
