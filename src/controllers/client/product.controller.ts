@@ -6,7 +6,7 @@ import { ProductSchema, TProductSchema } from "src/validation/product.schema";
 const getHomePage = async (req: Request, res: Response) => {
   const products = await getAllProducts();
   const user = req.user;
-  console.log(">>> check current user: ", user);
+  // console.log(">>> check current user: ", user);
   return res.render("client/homepage/show.ejs", {
     products,
   });

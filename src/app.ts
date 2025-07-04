@@ -44,6 +44,12 @@ app.use(passport.initialize());
 app.use(passport.authenticate("session"));
 configPassportLocal();
 
+// config global
+app.use((req, res, next) => {
+  res.locals.user = req.user || null; // Pass user object to all views
+  next();
+});
+
 // config routes
 webRoutes(app);
 
