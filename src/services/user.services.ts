@@ -81,6 +81,20 @@ const updateUserById = async (
   });
   return updateUser;
 };
+const getUserWithRoleById = async (id: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: +id,
+    },
+    include: {
+      role: true,
+    },
+    omit: {
+      password: true,
+    },
+  });
+  return user;
+};
 export {
   handleCreateUser,
   getAllUsers,
@@ -90,4 +104,5 @@ export {
   getAllRoles,
   hashPassWord,
   comparePassword,
+  getUserWithRoleById,
 };

@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { handleLogin } from "services/client/auth.service";
-import { getUserById } from "services/user.services";
+import { getUserWithRoleById } from "services/user.services";
 const configPassportLocal = () => {
   passport.use(
     new LocalStrategy(
@@ -27,7 +27,7 @@ const configPassportLocal = () => {
     const { id, username } = user;
 
     // querry database
-    const userInDB = await getUserById(id);
+    const userInDB = await getUserWithRoleById(id);
     return callback(null, { ...userInDB });
   });
 };

@@ -1,4 +1,5 @@
 import { Response, Request } from "express";
+import { use } from "passport";
 import { registerNewUser } from "services/client/auth.service";
 import { RegisterSchema, TRegister } from "src/validation/auth.schema";
 
@@ -48,4 +49,13 @@ const postResgister = async (req: Request, res: Response) => {
   return res.redirect("/login");
 };
 
-export { getLoginPage, getRegisterPage, postResgister };
+const getSuccessRedirectPage = (req: Request, res: Response) => {
+  const { user } = req as any;
+  if (user.role.name === "ADMIN") {
+    return res.redirect("/admin");
+  } else {
+    return res.redirect("/");
+  }
+};
+
+export { getLoginPage, getRegisterPage, postResgister, getSuccessRedirectPage };
