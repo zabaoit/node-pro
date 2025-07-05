@@ -8,12 +8,19 @@ const isLogin = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  const { user } = req;
+  // apply only to admin
+  if (req.path.startsWith("/admin")) {
+    const { user } = req;
 
-  if (user.role.name !== "ADMIN") {
-    return res.redirect("/");
-  } else {
-    next();
+    if (user?.role?.name !== "ADMIN") {
+      return res.render("status/403.ejs");
+    } else {
+      next();
+    }
+    return;
   }
+
+  // client routes
+  next();
 };
 export { isLogin, isAdmin };

@@ -55,7 +55,13 @@ app.use((req, res, next) => {
 // config routes
 webRoutes(app);
 
+// seeding data
 initDataBase();
+
+// handle 404 not found
+app.use((req, res) => {
+  res.render("status/404.ejs");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port: ${port}`);

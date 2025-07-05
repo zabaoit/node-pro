@@ -51,7 +51,7 @@ const webRoutes = (app: Express) => {
   router.post("/logout", postLogout);
 
   // admin router
-  router.get("/admin", isAdmin, getDashBoardPage);
+  router.get("/admin", getDashBoardPage);
 
   //  admin user
   router.get("/admin/user", getAdminUserPage);
@@ -70,7 +70,7 @@ const webRoutes = (app: Express) => {
   router.post("/admin/update-product", fileUploadMiddleware("avatar", "images/product"), postAdminUpdateProduct);
 
   router.get("/admin/order", getAdminOrderPage);
-  app.use("/", router);
+  app.use("/", isAdmin, router);
 };
 
 export default webRoutes;
