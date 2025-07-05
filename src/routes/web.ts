@@ -18,6 +18,7 @@ import {
   getHomePage,
   getProductPage,
   getViewProduct,
+  postAddProductToCart,
   postAdminCreateProduct,
   postAdminDeleteProduct,
   postAdminUpdateProduct,
@@ -49,6 +50,9 @@ const webRoutes = (app: Express) => {
     })
   );
   router.post("/logout", postLogout);
+
+  // client
+  router.post("/add-product-to-cart/:id", postAddProductToCart);
 
   // admin router
   router.get("/admin", getDashBoardPage);

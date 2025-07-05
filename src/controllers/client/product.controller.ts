@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
+import { use } from "passport";
 import { createProduct, getProductById, handleDeleteProduct, updateProductById } from "services/admin/product.service";
-import { getAllProducts } from "services/client/home.service";
+import { addProductToCart, getAllProducts } from "services/client/home.service";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -111,6 +112,19 @@ const postAdminUpdateProduct = async (req: Request, res: Response) => {
   await updateProductById(id, name, +price, detailDesc, shortDesc, +quantity, factory, target, image);
   return res.redirect("/admin/product");
 };
+
+const postAddProductToCart = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  if (user) {
+    await addProductToCart(1, +id, user);
+  } else {
+    return res.redirect("/login");
+  }
+  return res.redirect("/");
+};
+
 export {
   getHomePage,
   getProductPage,
@@ -119,4 +133,5 @@ export {
   postAdminDeleteProduct,
   getViewProduct,
   postAdminUpdateProduct,
+  postAddProductToCart,
 };

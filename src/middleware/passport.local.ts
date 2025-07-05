@@ -27,7 +27,7 @@ const configPassportLocal = () => {
     const { id, username } = user;
 
     // querry database
-    const userInDB = await getUserWithRoleById(id);
+    const userInDB: any = await getUserWithRoleById(id);
     return callback(null, { ...userInDB });
   });
 };
