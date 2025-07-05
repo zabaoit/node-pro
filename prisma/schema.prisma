@@ -34,6 +34,7 @@ model User {
 
   role   Roles @relation(fields: [roleId], references: [id])
   roleId Int
+  Cart Cart?
 }
 
 model Roles {
@@ -63,4 +64,32 @@ model Product {
   sold		Int?   @default(0)
   factory String   @db.VarChar(255)
   target String   @db.VarChar(255)
+
+  cartDetails CartDetail[]
+
+}
+
+model Cart {
+  id Int @id @default(autoincrement())
+  sum Int
+
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+
+  cartDetails CartDetail[]
+  @@map("carts")
+}
+
+model CartDetail {
+  id Int @id @default(autoincrement())
+  price Int
+  quantity Int
+
+  cart Cart @relation(fields: [cartId], references: [id])
+  cartId Int
+
+  prodcut Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  @@map("cart_detail")
 }
