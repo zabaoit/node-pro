@@ -27,6 +27,7 @@ import {
   getRegisterPage,
   postResgister,
   getSuccessRedirectPage,
+  postLogout,
 } from "controllers/client/auth.controller";
 import passport from "passport";
 import { isAdmin, isLogin } from "src/middleware/auth";
@@ -47,6 +48,7 @@ const webRoutes = (app: Express) => {
       failureMessage: true,
     })
   );
+  router.post("/logout", postLogout);
 
   // admin router
   router.get("/admin", isAdmin, getDashBoardPage);

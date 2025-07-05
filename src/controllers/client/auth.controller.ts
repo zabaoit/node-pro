@@ -1,4 +1,4 @@
-import { Response, Request } from "express";
+import { Response, Request, NextFunction } from "express";
 import { use } from "passport";
 import { registerNewUser } from "services/client/auth.service";
 import { RegisterSchema, TRegister } from "src/validation/auth.schema";
@@ -58,4 +58,13 @@ const getSuccessRedirectPage = (req: Request, res: Response) => {
   }
 };
 
-export { getLoginPage, getRegisterPage, postResgister, getSuccessRedirectPage };
+const postLogout = (req: Request, res: Response, next: NextFunction) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
+
+export { getLoginPage, getRegisterPage, postResgister, getSuccessRedirectPage, postLogout };

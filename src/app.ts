@@ -1,3 +1,5 @@
+/// <reference path="./types/index.d.ts" />
+
 const express = require("express");
 import "dotenv/config";
 import webRoutes from "./routes/web";

@@ -8,7 +8,8 @@ const isLogin = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const isAdmin = (req: Request, res: Response, next: NextFunction) => {
-  const { user } = req as any;
+  const { user } = req;
+
   if (user.role.name !== "ADMIN") {
     return res.redirect("/");
   } else {
