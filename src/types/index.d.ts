@@ -4,6 +4,7 @@ declare global {
   namespace Express {
     interface User extends UserPrisma {
       role: Roles;
+      sumCart?: number;
     }
   }
 }

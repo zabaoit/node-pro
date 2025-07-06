@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { use } from "passport";
 import { createProduct, getProductById, handleDeleteProduct, updateProductById } from "services/admin/product.service";
-import { addProductToCart, getAllProducts } from "services/client/home.service";
+import { addProductToCart, getAllProducts, getProductInCart } from "services/client/home.service";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -129,7 +129,14 @@ const getCartPage = async (req: Request, res: Response) => {
   const user = req.user;
   if (!user) return res.redirect("/login");
 
-  return res.render("client/product/cart");
+  const cartDetails = await getProductInCart(+user.id);
+
+  const totalPrice = cartDetails?.map(item => item.price * item.quantity)?.reduce((a, b) => a + b, 0);
+
+  return res.render("client/product/cart", {
+    cartDetails,
+    totalPrice,
+  });
 };
 
 export {
