@@ -100,4 +100,38 @@ const getProductInCart = async (userId: number) => {
 
   return [];
 };
-export { getAllProducts, getProductById, addProductToCart, getProductInCart };
+
+const DeleteProductInCart = async (cartDetailId: number, user: Express.User, sumCart: number) => {
+  const cartDetail = await prisma.cartDetail.findUnique({
+    where: { id: cartDetailId },
+    select: { quantity: true },
+  });
+
+  const quantity = cartDetail.quantity;
+  // console.log(">>> check quantity: ", quantity);
+  // delete cartDetail
+  await prisma.cartDetail.delete({
+    where: {
+      id: cartDetailId,
+    },
+  });
+
+  // delete cart
+  if (sumCart === 1) {
+    await prisma.cart.delete({
+      where: { userId: user.id },
+    });
+  } else {
+    // update sum cart
+    await prisma.cart.update({
+      where: { userId: user.id },
+      data: {
+        sum: {
+          decrement: quantity,
+        },
+      },
+    });
+  }
+};
+
+export { getAllProducts, getProductById, addProductToCart, getProductInCart, DeleteProductInCart };
