@@ -150,6 +150,20 @@ const postDeleteProductInCart = async (req: Request, res: Response) => {
   return res.redirect("/cart");
 };
 
+const getCheckOutPage = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) return res.redirect("/login");
+
+  const cartDetails = await getProductInCart(+user.id);
+
+  const totalPrice = cartDetails?.map(item => item.price * item.quantity)?.reduce((a, b) => a + b, 0);
+
+  return res.render("client/product/checkout", {
+    cartDetails,
+    totalPrice,
+  });
+};
+
 export {
   getHomePage,
   getProductPage,
@@ -161,4 +175,5 @@ export {
   postAddProductToCart,
   getCartPage,
   postDeleteProductInCart,
+  getCheckOutPage,
 };

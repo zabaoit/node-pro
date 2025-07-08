@@ -16,6 +16,7 @@ import fileUploadMiddleware from "src/middleware/multer";
 import {
   getAdminCreateProductPage,
   getCartPage,
+  getCheckOutPage,
   getHomePage,
   getProductPage,
   getViewProduct,
@@ -57,7 +58,7 @@ const webRoutes = (app: Express) => {
   router.post("/add-product-to-cart/:id", postAddProductToCart);
   router.get("/cart", getCartPage);
   router.post("/delete-product-in-cart/:id", postDeleteProductInCart);
-
+  router.get("/checkout", getCheckOutPage);
   // admin router
   router.get("/admin", getDashBoardPage);
 
