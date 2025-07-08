@@ -1,6 +1,12 @@
 import { Response, Request } from "express";
 import { createProduct, getProductById, handleDeleteProduct, updateProductById } from "services/admin/product.service";
-import { addProductToCart, DeleteProductInCart, getAllProducts, getProductInCart } from "services/client/home.service";
+import {
+  addProductToCart,
+  DeleteProductInCart,
+  getAllProducts,
+  getProductInCart,
+  updateCartDetailBeforeCheckout,
+} from "services/client/home.service";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -164,6 +170,18 @@ const getCheckOutPage = async (req: Request, res: Response) => {
   });
 };
 
+const postHandleCartToCheckOut = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) return res.redirect("/login");
+
+  const currentCartDetail: { id: string; quantity: string }[] = req.body?.cartDetails ?? [];
+
+  console.log(currentCartDetail);
+  await updateCartDetailBeforeCheckout(currentCartDetail);
+
+  return res.redirect("/checkout");
+};
+
 export {
   getHomePage,
   getProductPage,
@@ -176,4 +194,5 @@ export {
   getCartPage,
   postDeleteProductInCart,
   getCheckOutPage,
+  postHandleCartToCheckOut,
 };
