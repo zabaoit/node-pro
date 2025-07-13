@@ -5,6 +5,7 @@ import {
   DeleteProductInCart,
   getAllProducts,
   getProductInCart,
+  handlePlaceOrder,
   updateCartDetailBeforeCheckout,
 } from "services/client/home.service";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
@@ -182,6 +183,22 @@ const postHandleCartToCheckOut = async (req: Request, res: Response) => {
   return res.redirect("/checkout");
 };
 
+const postPlaceOrder = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) return res.redirect("/login");
+
+  const { receiverName, receiverAddress, receiverPhone, totalPrice } = req.body;
+  await handlePlaceOrder(+user.id, receiverName, receiverAddress, receiverPhone, +totalPrice);
+  return res.redirect("/thanks");
+};
+
+const getThanksPage = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) return res.redirect("/login");
+
+  return res.render("client/product/thanks.ejs");
+};
+
 export {
   getHomePage,
   getProductPage,
@@ -195,4 +212,6 @@ export {
   postDeleteProductInCart,
   getCheckOutPage,
   postHandleCartToCheckOut,
+  postPlaceOrder,
+  getThanksPage,
 };

@@ -19,6 +19,7 @@ import {
   getCheckOutPage,
   getHomePage,
   getProductPage,
+  getThanksPage,
   getViewProduct,
   postAddProductToCart,
   postAdminCreateProduct,
@@ -26,6 +27,7 @@ import {
   postAdminUpdateProduct,
   postDeleteProductInCart,
   postHandleCartToCheckOut,
+  postPlaceOrder,
 } from "controllers/client/product.controller";
 import {
   getLoginPage,
@@ -60,8 +62,10 @@ const webRoutes = (app: Express) => {
   router.get("/cart", getCartPage);
   router.post("/delete-product-in-cart/:id", postDeleteProductInCart);
   router.post("/handle-cart-to-checkout", postHandleCartToCheckOut);
-
   router.get("/checkout", getCheckOutPage);
+  router.post("/place-order", postPlaceOrder);
+  router.get("/thanks", getThanksPage);
+
   // admin router
   router.get("/admin", getDashBoardPage);
 
