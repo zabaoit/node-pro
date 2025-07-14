@@ -7,6 +7,7 @@ import {
   handleViewUser,
 } from "controllers/user.controller";
 import {
+  getAdminOrderDetailPage,
   getAdminOrderPage,
   getAdminProductPage,
   getAdminUserPage,
@@ -86,6 +87,8 @@ const webRoutes = (app: Express) => {
   router.post("/admin/update-product", fileUploadMiddleware("avatar", "images/product"), postAdminUpdateProduct);
 
   router.get("/admin/order", getAdminOrderPage);
+  router.get("/admin/order/:id", getAdminOrderDetailPage);
+
   app.use("/", isAdmin, router);
 };
 
