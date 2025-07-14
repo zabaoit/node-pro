@@ -197,6 +197,19 @@ const handlePlaceOrder = async (
   }
 };
 
+const getOrderHistory = async (userId: number) => {
+  return await prisma.order.findMany({
+    where: { userId },
+    include: {
+      orderDetails: {
+        include: {
+          product: true,
+        },
+      },
+    },
+  });
+};
+
 export {
   getAllProducts,
   getProductById,
@@ -205,4 +218,5 @@ export {
   DeleteProductInCart,
   updateCartDetailBeforeCheckout,
   handlePlaceOrder,
+  getOrderHistory,
 };

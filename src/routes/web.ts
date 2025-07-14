@@ -39,6 +39,7 @@ import {
 } from "controllers/client/auth.controller";
 import passport from "passport";
 import { isAdmin, isLogin } from "src/middleware/auth";
+import { getOrderHistoryPage } from "controllers/client/order.controller";
 const router = express.Router();
 
 const webRoutes = (app: Express) => {
@@ -67,6 +68,7 @@ const webRoutes = (app: Express) => {
   router.post("/place-order", postPlaceOrder);
   router.get("/thanks", getThanksPage);
 
+  router.get("/order-history", getOrderHistoryPage);
   // admin router
   router.get("/admin", getDashBoardPage);
 
