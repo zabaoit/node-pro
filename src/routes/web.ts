@@ -23,6 +23,7 @@ import {
   getThanksPage,
   getViewProduct,
   postAddProductToCart,
+  postAddToCartFromDetailPage,
   postAdminCreateProduct,
   postAdminDeleteProduct,
   postAdminUpdateProduct,
@@ -69,6 +70,7 @@ const webRoutes = (app: Express) => {
   router.get("/thanks", getThanksPage);
 
   router.get("/order-history", getOrderHistoryPage);
+  router.post("/add-to-cart-from-detail-page/:id", postAddToCartFromDetailPage);
   // admin router
   router.get("/admin", getDashBoardPage);
 
