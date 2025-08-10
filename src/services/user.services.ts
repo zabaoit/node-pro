@@ -50,6 +50,20 @@ const countTotalUserPages = async () => {
   const totalPages = Math.ceil(totalItems / pageSize);
   return totalPages;
 };
+
+const countTotalProductPages = async () => {
+  const totalItems = await prisma.product.count();
+  const pageSize = TOTAL_ITEM_PER_PAGE;
+  const totalPages = Math.ceil(totalItems / pageSize);
+  return totalPages;
+};
+
+const countTotalOrderPages = async () => {
+  const totalItems = await prisma.order.count();
+  const pageSize = TOTAL_ITEM_PER_PAGE;
+  const totalPages = Math.ceil(totalItems / pageSize);
+  return totalPages;
+};
 const getAllRoles = async () => {
   const roles = await prisma.roles.findMany();
   return roles;
@@ -127,4 +141,6 @@ export {
   getUserWithRoleById,
   getUserSumCart,
   countTotalUserPages,
+  countTotalProductPages,
+  countTotalOrderPages,
 };

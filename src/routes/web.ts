@@ -90,6 +90,7 @@ const webRoutes = (app: Express) => {
   router.get("/admin/view-product/:id", getViewProduct);
   router.post("/admin/update-product", fileUploadMiddleware("avatar", "images/product"), postAdminUpdateProduct);
 
+  // admin order
   router.get("/admin/order", getAdminOrderPage);
   router.get("/admin/order/:id", getAdminOrderDetailPage);
 
