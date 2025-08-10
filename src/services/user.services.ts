@@ -34,8 +34,13 @@ const handleCreateUser = async (
   });
 };
 
-const getAllUsers = async () => {
-  const users = await prisma.user.findMany();
+const getAllUsers = async (page: number) => {
+  const pageSize = 3;
+  const skip = (page - 1) * pageSize;
+  const users = await prisma.user.findMany({
+    skip: skip,
+    take: pageSize,
+  });
   return users;
 };
 
