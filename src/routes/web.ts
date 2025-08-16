@@ -20,6 +20,7 @@ import {
   getCheckOutPage,
   getHomePage,
   getProductPage,
+  getProductPageClient,
   getThanksPage,
   getViewProduct,
   postAddProductToCart,
@@ -68,6 +69,7 @@ const webRoutes = (app: Express) => {
   router.get("/checkout", getCheckOutPage);
   router.post("/place-order", postPlaceOrder);
   router.get("/thanks", getThanksPage);
+  router.get("/products", getProductPageClient);
 
   router.get("/order-history", getOrderHistoryPage);
   router.post("/add-to-cart-from-detail-page/:id", postAddToCartFromDetailPage);

@@ -2,20 +2,30 @@ import { Response, Request } from "express";
 import { createProduct, getProductById, handleDeleteProduct, updateProductById } from "services/admin/product.service";
 import {
   addProductToCart,
+  countTotalProductClient,
   DeleteProductInCart,
   getAllProducts,
   getProductInCart,
   handlePlaceOrder,
   updateCartDetailBeforeCheckout,
 } from "services/client/home.service";
+import { countTotalProductPages } from "services/user.services";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
 
 const getHomePage = async (req: Request, res: Response) => {
-  const products = await getAllProducts();
-  const user = req.user;
-  // console.log(">>> check current user: ", user);
+  const { page } = req.query;
+
+  // check < 0
+  let currentPage = page ? +page : 1;
+  if (currentPage <= 0) currentPage = 1;
+
+  const products = await getAllProducts(+currentPage, 8);
+  const totalPages = await countTotalProductClient(8);
+
   return res.render("client/homepage/show.ejs", {
     products,
+    totalPages,
+    page: +currentPage,
   });
 };
 
@@ -220,6 +230,23 @@ const postAddToCartFromDetailPage = async (req: Request, res: Response) => {
   return res.redirect(`/product/${id}`);
 };
 
+const getProductPageClient = async (req: Request, res: Response) => {
+  const { page } = req.query;
+
+  // check < 0
+  let currentPage = page ? +page : 1;
+  if (currentPage <= 0) currentPage = 1;
+
+  const products = await getAllProducts(+currentPage, 6);
+
+  const totalPages = await countTotalProductClient(6);
+  return res.render("client/product/filter.ejs", {
+    products,
+    page: +currentPage,
+    totalPages,
+  });
+};
+
 export {
   getHomePage,
   getProductPage,
@@ -236,4 +263,5 @@ export {
   postPlaceOrder,
   getThanksPage,
   postAddToCartFromDetailPage,
+  getProductPageClient,
 };
